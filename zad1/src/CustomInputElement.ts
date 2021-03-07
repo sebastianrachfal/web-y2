@@ -17,7 +17,7 @@ class CustomInputElement {
 	populateElements() {
 		this.inputEl = document.createElement('input');
 		this.inputEl.type = 'number';
-		this.inputEl.addEventListener('change', () => this.update());
+		this.inputEl.addEventListener('keyup', () => this.update());
 
 		this.btnEl = document.createElement('button');
 		this.btnEl.innerText = 'X';

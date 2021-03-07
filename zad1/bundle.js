@@ -9,7 +9,7 @@ var CustomInputElement = /** @class */ (function () {
         var _this = this;
         this.inputEl = document.createElement('input');
         this.inputEl.type = 'number';
-        this.inputEl.addEventListener('change', function () { return _this.update(); });
+        this.inputEl.addEventListener('keyup', function () { return _this.update(); });
         this.btnEl = document.createElement('button');
         this.btnEl.innerText = 'X';
         this.btnEl.addEventListener('click', function () { return _this.remove(_this.id); });
@@ -28,8 +28,8 @@ var Main = /** @class */ (function () {
         this.removeItem = this.removeItem.bind(this);
         this.updateItems = this.updateItems.bind(this);
         this.getElements();
-        console.log(this.setEl);
         this.setEl.addEventListener('click', this.addItems);
+        this.displayResults(0, 0, 0, 0);
     }
     Main.prototype.getElements = function () {
         this.amoEl = document.querySelector('#amo');
@@ -40,14 +40,12 @@ var Main = /** @class */ (function () {
         this.maxEl = document.querySelector('#max');
         this.inputContainer = document.querySelector('#fields');
     };
-    Main.prototype.calculateData = function () {
-        console.log('init');
-    };
     Main.prototype.addItems = function () {
         var num;
         if ((num = parseInt(this.amoEl.value)) == NaN || num < 0)
             return window.alert('Invalid number');
         this.inputs = [];
+        this.inputContainer.innerHTML = '';
         this.updateItems();
         for (var i = 0; i < num; i++)
             this.inputContainer.appendChild(this.inputs[this.inputs.push(new CustomInputElement(i, this.removeItem, this.updateItems)) - 1].getElement());
@@ -55,7 +53,7 @@ var Main = /** @class */ (function () {
     Main.prototype.updateItems = function () {
         var values = this.inputs.filter(function (input) { return input.inputEl.value.length > 0; }).map(function (input) { return +input.inputEl.value; });
         if (values.length == 0)
-            return;
+            return this.displayResults(0, 0, 0, 0);
         var sum = 0, min = values[0], max = values[0];
         for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
             var item = values_1[_i];
@@ -68,12 +66,17 @@ var Main = /** @class */ (function () {
         }
         this.displayResults(sum, sum / values.length, min, max);
     };
-    Main.prototype.removeItem = function (n) { };
+    Main.prototype.removeItem = function (n) {
+        var index = this.inputs.map(function (input) { return input.id; }).indexOf(n);
+        this.inputContainer.removeChild(this.inputs[index].liEl);
+        this.inputs.splice(index, 1);
+        this.updateItems();
+    };
     Main.prototype.displayResults = function (sum, avg, min, max) {
-        this.sumEl.value = '' + sum;
-        this.avgEl.value = '' + avg;
-        this.minEl.value = '' + min;
-        this.maxEl.value = '' + max;
+        this.sumEl.value = '' + sum.toFixed(2);
+        this.avgEl.value = '' + avg.toFixed(2);
+        this.minEl.value = '' + min.toFixed(2);
+        this.maxEl.value = '' + max.toFixed(2);
     };
     return Main;
 }());
