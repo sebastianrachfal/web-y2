@@ -1,62 +1,77 @@
-var CustomInputElement = /** @class */ (function () {
-    function CustomInputElement(id, rm, up) {
+class CustomInputElement {
+    constructor(id, rm, up) {
         this.id = id;
         this.remove = rm;
         this.update = up;
         this.populateElements();
     }
-    CustomInputElement.prototype.populateElements = function () {
-        var _this = this;
+    populateElements() {
         this.inputEl = document.createElement('input');
         this.inputEl.type = 'number';
-        this.inputEl.addEventListener('keyup', function () { return _this.update(); });
-        this.btnEl = document.createElement('button');
-        this.btnEl.innerText = 'X';
-        this.btnEl.addEventListener('click', function () { return _this.remove(_this.id); });
+        this.inputEl.addEventListener('keyup', () => this.update());
+        this.inputEl.addEventListener('change', () => this.update());
+        this.chkEl = document.createElement('input');
+        this.chkEl.type = 'checkbox';
+        this.chkEl.addEventListener('click', () => this.remove(this.id, (this.checked = !this.checked)));
         this.liEl = document.createElement('li');
         this.liEl.appendChild(this.inputEl);
-        this.liEl.appendChild(this.btnEl);
-    };
-    CustomInputElement.prototype.getElement = function () {
+        this.liEl.appendChild(this.chkEl);
+    }
+    getElement() {
         return this.liEl;
-    };
-    return CustomInputElement;
-}());
-var Main = /** @class */ (function () {
-    function Main() {
+    }
+}
+class Main {
+    constructor() {
+        this.inputsToRemove = [];
         this.addItems = this.addItems.bind(this);
         this.removeItem = this.removeItem.bind(this);
         this.updateItems = this.updateItems.bind(this);
+        this.removeSelected = this.removeSelected.bind(this);
         this.getElements();
         this.setEl.addEventListener('click', this.addItems);
+        this.rmEl.addEventListener('click', this.removeSelected);
         this.displayResults(0, 0, 0, 0);
     }
-    Main.prototype.getElements = function () {
+    removeSelected() {
+        if (this.inputsToRemove.length === 0)
+            return;
+        for (let index of this.inputsToRemove.sort((a, b) => b - a)) {
+            this.inputContainer.removeChild(this.inputs[index].liEl);
+            this.inputs.splice(index, 1);
+        }
+        this.inputsToRemove = [];
+        this.updateItems();
+    }
+    getElements() {
         this.amoEl = document.querySelector('#amo');
         this.setEl = document.querySelector('#set');
+        this.rmEl = document.querySelector('#rm');
         this.sumEl = document.querySelector('#sum');
         this.avgEl = document.querySelector('#avg');
         this.minEl = document.querySelector('#min');
         this.maxEl = document.querySelector('#max');
         this.inputContainer = document.querySelector('#fields');
-    };
-    Main.prototype.addItems = function () {
-        var num;
+        this.loaders = document.querySelectorAll('img');
+    }
+    addItems() {
+        let num;
         if ((num = parseInt(this.amoEl.value)) == NaN || num < 0)
             return window.alert('Invalid number');
         this.inputs = [];
+        this.inputsToRemove = [];
         this.inputContainer.innerHTML = '';
         this.updateItems();
-        for (var i = 0; i < num; i++)
+        for (let i = 0; i < num; i++)
             this.inputContainer.appendChild(this.inputs[this.inputs.push(new CustomInputElement(i, this.removeItem, this.updateItems)) - 1].getElement());
-    };
-    Main.prototype.updateItems = function () {
-        var values = this.inputs.filter(function (input) { return input.inputEl.value.length > 0; }).map(function (input) { return +input.inputEl.value; });
+    }
+    updateItems() {
+        let values = this.inputs.filter((input) => input.inputEl.value.length > 0).map((input) => +input.inputEl.value);
         if (values.length == 0)
-            return this.displayResults(0, 0, 0, 0);
-        var sum = 0, min = values[0], max = values[0];
-        for (var _i = 0, values_1 = values; _i < values_1.length; _i++) {
-            var item = values_1[_i];
+            return this.changeLoaderState(true);
+        this.changeLoaderState(false);
+        let sum = 0, min = values[0], max = values[0];
+        for (let item of values) {
             console.log(item);
             sum += item;
             if (item < min)
@@ -65,20 +80,28 @@ var Main = /** @class */ (function () {
                 max = item;
         }
         this.displayResults(sum, sum / values.length, min, max);
-    };
-    Main.prototype.removeItem = function (n) {
-        var index = this.inputs.map(function (input) { return input.id; }).indexOf(n);
-        this.inputContainer.removeChild(this.inputs[index].liEl);
-        this.inputs.splice(index, 1);
-        this.updateItems();
-    };
-    Main.prototype.displayResults = function (sum, avg, min, max) {
+    }
+    changeLoaderState(visible) {
+        for (let input of [this.sumEl, this.avgEl, this.minEl, this.maxEl])
+            input.style.visibility = visible ? 'hidden' : 'visible';
+        for (let img of this.loaders)
+            img.style.visibility = visible ? 'visible' : 'hidden';
+    }
+    removeItem(n, add) {
+        if (add) {
+            let index = this.inputs.map((input) => input.id).indexOf(n);
+            this.inputsToRemove.push(index);
+        }
+        else
+            this.inputsToRemove.splice(this.inputsToRemove.indexOf(n), 1);
+        console.log(this.inputsToRemove);
+    }
+    displayResults(sum, avg, min, max) {
         this.sumEl.value = '' + sum.toFixed(2);
         this.avgEl.value = '' + avg.toFixed(2);
         this.minEl.value = '' + min.toFixed(2);
         this.maxEl.value = '' + max.toFixed(2);
-    };
-    return Main;
-}());
+    }
+}
 new Main();
 //# sourceMappingURL=bundle.js.map

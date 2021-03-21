@@ -4,21 +4,88 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>List</title>
+		<title>Input calculator</title>
+		<style>
+			body {
+				overflow-x: hidden;
+				background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+				min-height: 100vh;
+				margin: 0;
+				color: white;
+				font-family: 'Anton', sans-serif;
+			}
+			header {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				padding: 10px;
+			}
+			button {
+				margin: 0 10px;
+			}
+			button:last-child {
+				margin-left: 0;
+			}
+			.title {
+				padding-right: 10px;
+			}
+			.spinner {
+				width: 20px;
+				height: 20px;
+			}
+			ul {
+				list-style-type: none;
+				padding: 0;
+			}
+			.results {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+			}
+			.results li {
+				width: 20%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			input[disabled='true'] {
+				visibility: hidden;
+			}
+			#fields {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+			}
+			#fields li {
+				width: fit-content;
+				padding: 4px 16px;
+				display: flex;
+				align-items: center;
+			}
+			input,
+			button {
+				padding: 5px;
+				border-radius: 5px;
+				color: white;
+				background-color: rgba(239, 239, 239, 0.3);
+				border-color: rgba(118, 118, 118, 0.3);
+			}
+		</style>
 	</head>
 	<body>
-		<div>
-			<span>Inputs amount:</span>
+		<header>
+			<span class="title">Inputs amount:</span>
 			<input type="number" id="amo" />
 			<button id="set">Set</button>
-		</div>
+			<button id="rm">Remove selected</button>
+		</header>
 		<ul id="fields"></ul>
 
-		<ul>
-			<li>Sum: <input type="number" disabled="true" id="sum" /></li>
-			<li>Avg: <input type="number" disabled="true" id="avg" /></li>
-			<li>Min: <input type="number" disabled="true" id="min" /></li>
-			<li>Max: <input type="number" disabled="true" id="max" /></li>
+		<ul class="results">
+			<li>Sum <input type="number" disabled="true" id="sum" /><img class="spinner" src="./src/loading.gif" /></li>
+			<li>Avg <input type="number" disabled="true" id="avg" /><img class="spinner" src="./src/loading.gif" /></li>
+			<li>Min <input type="number" disabled="true" id="min" /><img class="spinner" src="./src/loading.gif" /></li>
+			<li>Max <input type="number" disabled="true" id="max" /><img class="spinner" src="./src/loading.gif" /></li>
 		</ul>
 		<script type="text/javascript" src="bundle.js"></script>
 	</body>
