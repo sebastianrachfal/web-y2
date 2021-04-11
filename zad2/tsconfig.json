@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"target": "es6",
+		"module": "none",
+		"sourceMap": true,
+		"outFile": "./bundle.js"
+	},
+	"filesGlob": ["**/*.ts"]
+}

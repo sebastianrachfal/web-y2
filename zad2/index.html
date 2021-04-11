@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Drum kit</title>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				overflow: hidden;
+				height: 100vh;
+				margin: 0;
+				display: flex;
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.line {
+				height: 100%;
+				flex: 1;
+				position: relative;
+				transition: filter 0.1s;
+			}
+			.line > span {
+				position: absolute;
+				font-size: 30px;
+				bottom: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				text-transform: uppercase;
+				background-color: white;
+				width: 8vw;
+				height: 8vw;
+				max-width: 60px;
+				max-height: 60px;
+				text-align: center;
+				line-height: min(8vw, 60px);
+				border-radius: 50%;
+				box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+				transition: transform 0.1s;
+			}
+			.track-container {
+				position: absolute;
+				width: 45vw;
+				min-width: 400px;
+				padding: 10px;
+				background: white;
+				border-radius: 10px;
+				min-height: 100px;
+				top: 30px;
+				left: 50%;
+				transform: translateX(-50%);
+				z-index: 1;
+				padding-top: 25px;
+				box-shadow: rgba(0, 0, 0, 0.274) 0px 5px 15px;
+			}
+			.track {
+				display: flex;
+				align-items: center;
+				padding-bottom: 15px;
+			}
+			.track > button {
+				background: none;
+				font-weight: bold;
+				box-shadow: rgba(0, 0, 0, 0.075) 0px 5px 15px;
+				padding: 10px 15px;
+				margin-left: 10px;
+				border-radius: 6px;
+				font-size: 16px;
+				cursor: pointer;
+				transition: transform 0.1s;
+				border: 1px solid rgba(211, 211, 211, 0.705);
+				min-width: 80px;
+			}
+			.track > button:hover {
+				outline: none;
+				transform: translateY(2px);
+			}
+			.track > button:focus {
+				outline: none;
+			}
+			.track > span {
+				font-weight: bold;
+				white-space: nowrap;
+				border: 0;
+				background: none;
+				font-weight: bold;
+				box-shadow: rgba(0, 0, 0, 0.075) 0px 5px 15px;
+				padding: 15px;
+				margin-left: 10px;
+				border-radius: 6px;
+				font-size: 16px;
+				transition: transform 0.1s;
+				background-color: coral;
+				color: white;
+				text-shadow: rgba(0, 0, 0, 0.452) 0px 2px 2px;
+				pointer-events: none;
+			}
+			.track-line {
+				width: 100%;
+				margin: 20px;
+				height: 6px;
+				background-color: rgba(211, 211, 211, 0.562);
+				border-radius: 4px;
+				position: relative;
+				overflow: hidden;
+			}
+			.track-inner {
+				width: 50%;
+				height: 100%;
+				border-radius: 4px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-color: lightcoral;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="track-container">
+			<div class="track">
+				<span>Line 1</span>
+				<button>Pause</button>
+				<button>Clear</button>
+				<div class="track-line">
+					<div class="track-inner"></div>
+				</div>
+			</div>
+			<div class="track">
+				<span>Line 2</span>
+				<button>Play</button>
+				<button>Clear</button>
+				<div class="track-line">
+					<div class="track-inner"></div>
+				</div>
+			</div>
+			<div class="track">
+				<span>Line 3</span>
+				<button>Play</button>
+				<button>Clear</button>
+				<div class="track-line">
+					<div class="track-inner"></div>
+				</div>
+			</div>
+			<div class="track">
+				<span>Line 4</span>
+				<button>Play</button>
+				<button>Clear</button>
+				<div class="track-line">
+					<div class="track-inner"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="bundle.js"></script>
+	</body>
+</html>
