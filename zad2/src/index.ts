@@ -11,7 +11,8 @@ const AUDIO = [
 ];
 
 class Main {
-	lines: HTMLDivElement[] = [];
+	lines: Line[] = [];
+	bgLines: HTMLDivElement[] = [];
 	audioEls: HTMLAudioElement[] = [];
 
 	COLORS: string[] = [
@@ -29,9 +30,26 @@ class Main {
 		this.colorLines();
 		this.audioFiles();
 		this.applyEvents();
+		this.gatherLines();
+	}
+	gatherLines() {
+		const buttons = [
+			...document.querySelectorAll('button:not(.play-all)'),
+		] as HTMLButtonElement[];
+
+		for (const line of [...document.querySelectorAll('.track-inner')])
+			this.lines.push(
+				new Line(
+					buttons.shift(),
+					buttons.shift(),
+					buttons.shift(),
+					line as HTMLDivElement,
+					(note: string) => this.playSoundByLetter(note)
+				)
+			);
 	}
 	audioFiles() {
-		for (let clip of AUDIO) {
+		for (const clip of AUDIO) {
 			const audio = document.createElement('audio');
 			const source = document.createElement('source');
 
@@ -45,7 +63,7 @@ class Main {
 		}
 	}
 	colorLines() {
-		for (let letter of LETTERS) {
+		for (const letter of LETTERS) {
 			const div = document.createElement('div');
 			const span = document.createElement('span');
 
@@ -55,30 +73,43 @@ class Main {
 			div.style.backgroundColor =
 				Math.random() > 0.5 ? this.COLORS.pop() : this.COLORS.shift();
 
-			this.lines.push(div);
+			this.bgLines.push(div);
 			div.appendChild(span);
 			document.body.appendChild(div);
 		}
 	}
 	applyEvents() {
 		document.addEventListener('keydown', (e) => {
-			const index = LETTERS.indexOf(e.key.toLowerCase());
-			if (index > -1) {
-				this.playSound(this.audioEls[index]);
+			const key = e.key.toLowerCase();
 
-				this.lines[index].style.filter = 'brightness(1.6)';
-				(this.lines[index]
-					.children[0] as HTMLSpanElement).style.transform =
-					'translateX(-50%) translateY(10px)';
+			this.playSoundByLetter(key);
 
-				setTimeout(() => {
-					this.lines[index].style.filter = '';
-					(this.lines[index]
-						.children[0] as HTMLSpanElement).style.transform =
-						'translateX(-50%) translateY(0px)';
-				}, 100);
-			}
+			for (const line of this.lines) line.triggerSound(key);
 		});
+
+		document
+			.getElementsByClassName('play-all')[0]
+			.addEventListener('click', () =>
+				this.lines.forEach((line) => line.play())
+			);
+	}
+	playSoundByLetter(letter: string) {
+		const index = LETTERS.indexOf(letter);
+		if (index > -1) {
+			this.playSound(this.audioEls[index]);
+
+			this.bgLines[index].style.filter = 'brightness(1.6)';
+			(this.bgLines[index]
+				.children[0] as HTMLSpanElement).style.transform =
+				'translateX(-50%) translateY(10px)';
+
+			setTimeout(() => {
+				this.bgLines[index].style.filter = '';
+				(this.bgLines[index]
+					.children[0] as HTMLSpanElement).style.transform =
+					'translateX(-50%) translateY(0px)';
+			}, 100);
+		}
 	}
 	playSound(el: HTMLAudioElement) {
 		el.pause();

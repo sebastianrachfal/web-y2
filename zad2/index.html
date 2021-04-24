@@ -42,9 +42,9 @@
 			}
 			.track-container {
 				position: absolute;
-				width: 45vw;
-				min-width: 400px;
-				padding: 10px;
+				width: 60vw;
+				min-width: 416px;
+				padding: 10px 20px;
 				background: white;
 				border-radius: 10px;
 				min-height: 100px;
@@ -54,9 +54,13 @@
 				z-index: 1;
 				padding-top: 25px;
 				box-shadow: rgba(0, 0, 0, 0.274) 0px 5px 15px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 			.track {
 				display: flex;
+				width: 100%;
 				align-items: center;
 				padding-bottom: 15px;
 			}
@@ -71,7 +75,7 @@
 				cursor: pointer;
 				transition: transform 0.1s;
 				border: 1px solid rgba(211, 211, 211, 0.705);
-				min-width: 80px;
+				min-width: 90px;
 			}
 			.track > button:hover {
 				outline: none;
@@ -80,7 +84,8 @@
 			.track > button:focus {
 				outline: none;
 			}
-			.track > span {
+			.track > span,
+			.play-all {
 				font-weight: bold;
 				white-space: nowrap;
 				border: 0;
@@ -88,7 +93,6 @@
 				font-weight: bold;
 				box-shadow: rgba(0, 0, 0, 0.075) 0px 5px 15px;
 				padding: 15px;
-				margin-left: 10px;
 				border-radius: 6px;
 				font-size: 16px;
 				transition: transform 0.1s;
@@ -107,21 +111,33 @@
 				overflow: hidden;
 			}
 			.track-inner {
-				width: 50%;
 				height: 100%;
+				width: 0%;
 				border-radius: 4px;
 				position: absolute;
 				left: 0;
 				top: 0;
 				background-color: lightcoral;
 			}
+			.play-all {
+				width: 70%;
+				margin-bottom: 15px;
+				cursor: pointer;
+				transition: all 0.1s;
+				pointer-events: all;
+			}
+			.play-all:hover {
+				background-color: lightcoral;
+			}
 		</style>
 	</head>
 	<body>
 		<div class="track-container">
+			<button class="play-all">Play all lines</button>
 			<div class="track">
 				<span>Line 1</span>
-				<button>Pause</button>
+				<button>Play</button>
+				<button>Record</button>
 				<button>Clear</button>
 				<div class="track-line">
 					<div class="track-inner"></div>
@@ -130,6 +146,7 @@
 			<div class="track">
 				<span>Line 2</span>
 				<button>Play</button>
+				<button>Record</button>
 				<button>Clear</button>
 				<div class="track-line">
 					<div class="track-inner"></div>
@@ -138,6 +155,7 @@
 			<div class="track">
 				<span>Line 3</span>
 				<button>Play</button>
+				<button>Record</button>
 				<button>Clear</button>
 				<div class="track-line">
 					<div class="track-inner"></div>
@@ -146,6 +164,7 @@
 			<div class="track">
 				<span>Line 4</span>
 				<button>Play</button>
+				<button>Record</button>
 				<button>Clear</button>
 				<div class="track-line">
 					<div class="track-inner"></div>
