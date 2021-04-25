@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Weather app</title>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				overflow: hidden;
+				height: 100vh;
+				margin: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				background-color: #f5f0e1;
+			}
+			header {
+				width: 100vw;
+				background-color: #1e3d59;
+				height: 80px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			input {
+				padding: 10px 15px;
+				border: none;
+				background-color: #f5f0e1;
+				border-radius: 8px 0px 0px 8px;
+				font-size: 24px;
+				color: #494641;
+			}
+			input:focus {
+				outline: none;
+			}
+			button {
+				background-color: #ff6e40;
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 0px 8px 8px 0px;
+				cursor: pointer;
+				font-size: 24px;
+				transition: transform 0.1s;
+			}
+			button:hover {
+				transform: scale(1.1);
+			}
+			.card-container {
+				display: block;
+				padding: 30px;
+			}
+			.card {
+				background-color: #ff6e40;
+				color: white;
+				width: 250px;
+				padding: 10px;
+				border-radius: 8px;
+			}
+			.card__heading > h2 {
+				margin-top: 0px;
+				margin-bottom: 2px;
+			}
+			.card > h3 {
+				margin-top: 0px;
+				font-size: 14px;
+			}
+			.card__data {
+				display: flex;
+				justify-content: space-between;
+			}
+			.card__heading {
+				display: flex;
+				justify-content: space-between;
+			}
+			.card__close {
+				margin-top: 5px;
+				height: 15px;
+				width: 30px;
+				fill: white;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<input placeholder="Enter city name" />
+			<button>Add</button>
+		</header>
+		<div class="card-container">
+			<div class="card">
+				<div class="card__heading">
+					<h2>Kraków</h2>
+					<svg
+						class="card__close"
+						xmlns="http://www.w3.org/2000/svg"
+						xmlns:xlink="http://www.w3.org/1999/xlink"
+						version="1.1"
+						id="Capa_1"
+						x="0px"
+						y="0px"
+						width="348.333px"
+						height="348.334px"
+						viewBox="0 0 348.333 348.334"
+						style="enable-background: new 0 0 348.333 348.334"
+						xml:space="preserve"
+					>
+						<g>
+							<path
+								d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"
+							/>
+						</g>
+					</svg>
+				</div>
+				<h3>Polska</h3>
+				<div class="card__data">
+					<span>13 °C</span>
+					<span>1000 hPa</span>
+					<span>13 km/h</span>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="bundle.js"></script>
+	</body>
+</html>

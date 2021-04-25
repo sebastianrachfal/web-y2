@@ -32,6 +32,7 @@ class Main {
 		this.applyEvents();
 		this.gatherLines();
 	}
+
 	gatherLines() {
 		const buttons = [
 			...document.querySelectorAll('button:not(.play-all)'),
@@ -48,6 +49,7 @@ class Main {
 				)
 			);
 	}
+
 	audioFiles() {
 		for (const clip of AUDIO) {
 			const audio = document.createElement('audio');
@@ -62,6 +64,7 @@ class Main {
 			document.body.appendChild(audio);
 		}
 	}
+
 	colorLines() {
 		for (const letter of LETTERS) {
 			const div = document.createElement('div');
@@ -78,6 +81,7 @@ class Main {
 			document.body.appendChild(div);
 		}
 	}
+
 	applyEvents() {
 		document.addEventListener('keydown', (e) => {
 			const key = e.key.toLowerCase();
@@ -93,6 +97,7 @@ class Main {
 				this.lines.forEach((line) => line.play())
 			);
 	}
+
 	playSoundByLetter(letter: string) {
 		const index = LETTERS.indexOf(letter);
 		if (index > -1) {
@@ -111,6 +116,7 @@ class Main {
 			}, 100);
 		}
 	}
+
 	playSound(el: HTMLAudioElement) {
 		el.pause();
 		el.currentTime = 0;
