@@ -21,8 +21,19 @@
 				background-color: #1e3d59;
 				height: 80px;
 				display: flex;
-				justify-content: center;
+				justify-content: space-between;
 				align-items: center;
+			}
+			header > div {
+				flex: 1 1 100%;
+			}
+			header > div:nth-child(2) {
+				flex-grow: 1;
+				display: flex;
+			}
+			header > div:nth-child(3) {
+				display: flex;
+				justify-content: flex-end;
 			}
 			input {
 				padding: 10px 15px;
@@ -31,6 +42,7 @@
 				border-radius: 8px 0px 0px 8px;
 				font-size: 24px;
 				color: #494641;
+				transition: background-color 200ms;
 			}
 			input:focus {
 				outline: none;
@@ -49,15 +61,27 @@
 				transform: scale(1.1);
 			}
 			.card-container {
-				display: block;
+				display: flex;
+				flex-wrap: wrap;
 				padding: 30px;
+				padding-top: 20px;
 			}
 			.card {
+				position: relative;
 				background-color: #ff6e40;
 				color: white;
-				width: 250px;
+				width: 300px;
 				padding: 10px;
 				border-radius: 8px;
+				margin-right: 10px;
+				margin-top: 10px;
+			}
+			.card img {
+				position: absolute;
+				right: 26px;
+				top: -16px;
+				z-index: 9;
+				pointer-events: none;
 			}
 			.card__heading > h2 {
 				margin-top: 0px;
@@ -66,6 +90,7 @@
 			.card > h3 {
 				margin-top: 0px;
 				font-size: 14px;
+				z-index: 10;
 			}
 			.card__data {
 				display: flex;
@@ -77,51 +102,51 @@
 			}
 			.card__close {
 				margin-top: 5px;
-				height: 15px;
+				height: 22px;
 				width: 30px;
 				fill: white;
 				cursor: pointer;
+				padding: 4px;
+			}
+			.loader {
+				width: 90px;
+				height: 15px;
+				background-color: #3a5c7c;
+				margin-right: 10px;
+				border-radius: 10px;
+				padding: 3px;
+				display: flex;
+				align-items: center;
+			}
+			.loader__inner {
+				height: 100%;
+				background-color: #ff6e40;
+				border-radius: 10px;
+				animation: progress 30s infinite;
+				animation-timing-function: linear;
+			}
+			@keyframes progress {
+				0% {
+					width: 0%;
+				}
+				100% {
+					width: 100%;
+				}
 			}
 		</style>
 	</head>
 	<body>
 		<header>
-			<input placeholder="Enter city name" />
-			<button>Add</button>
-		</header>
-		<div class="card-container">
-			<div class="card">
-				<div class="card__heading">
-					<h2>Kraków</h2>
-					<svg
-						class="card__close"
-						xmlns="http://www.w3.org/2000/svg"
-						xmlns:xlink="http://www.w3.org/1999/xlink"
-						version="1.1"
-						id="Capa_1"
-						x="0px"
-						y="0px"
-						width="348.333px"
-						height="348.334px"
-						viewBox="0 0 348.333 348.334"
-						style="enable-background: new 0 0 348.333 348.334"
-						xml:space="preserve"
-					>
-						<g>
-							<path
-								d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85   c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563   c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85   l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554   L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"
-							/>
-						</g>
-					</svg>
-				</div>
-				<h3>Polska</h3>
-				<div class="card__data">
-					<span>13 °C</span>
-					<span>1000 hPa</span>
-					<span>13 km/h</span>
-				</div>
+			<div></div>
+			<div>
+				<input id="city-name" placeholder="Enter city name" />
+				<button id="add-button">Add</button>
 			</div>
-		</div>
+			<div>
+				<div class="loader"><div class="loader__inner"></div></div>
+			</div>
+		</header>
+		<div id="city-container" class="card-container"></div>
 		<script type="text/javascript" src="bundle.js"></script>
 	</body>
 </html>
