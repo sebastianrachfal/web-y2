@@ -1,10 +1,13 @@
+import Note from './classes/Note';
+
 const API_KEY = '503521ccf7b05b55d71724b96bd67f4d';
 const STORAGE_KEY = 'rachfal-weather';
 
-const queryByCityName = (city) =>
+const queryByCityName = (city: string) =>
 	`https://api.openweathermap.org/data/2.5/weather/?q=${encodeURIComponent(
 		city
 	)}&lang=pl&units=metric&l&appid=${API_KEY}`;
+
 class Main {
 	notes: Note[] = [];
 	backupCities: Note[] = [];
@@ -43,7 +46,7 @@ class Main {
 
 	loadData() {
 		this.notes = (JSON.parse(localStorage.getItem(STORAGE_KEY)) || []).map(
-			(note) => new Note(note)
+			(note: Note) => new Note(note)
 		);
 
 		this.updateView();

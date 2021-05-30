@@ -1,4 +1,4 @@
-class Note {
+export default class Note {
 	name: string;
 	country: string;
 	temp: number;
@@ -6,7 +6,21 @@ class Note {
 	windSpeed: number;
 	weatherType: string;
 
-	constructor({ name, country, temp, pressure, windSpeed, weatherType }) {
+	constructor({
+		name,
+		country,
+		temp,
+		pressure,
+		windSpeed,
+		weatherType,
+	}: {
+		name: string;
+		country: string;
+		temp: number;
+		pressure: number;
+		windSpeed: number;
+		weatherType: string;
+	}) {
 		this.name = name;
 		this.country = country;
 		this.temp = temp;
