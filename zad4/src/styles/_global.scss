@@ -1,0 +1,26 @@
+body {
+	background-color: $background;
+
+	&,
+	& * {
+		font-family: 'Roboto', sans-serif;
+		box-sizing: border-box;
+	}
+}
+
+header {
+	width: full;
+	& > h1 {
+		color: white;
+		text-align: center;
+	}
+}
+
+.accent {
+	color: $accent;
+}
+
+.hashtag {
+	color: $accent;
+	margin-right: 5px;
+}

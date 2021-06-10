@@ -1,6 +1,6 @@
-import AppData from '../types/AppData';
+import AppData from '@/types/AppData';
 
-export default interface AppStorage {
+export default interface IAppStorage {
 	initialize(): void;
 	saveData(data: AppData): void;
 	readData(): AppData;

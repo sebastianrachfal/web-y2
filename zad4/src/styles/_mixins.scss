@@ -1,0 +1,31 @@
+@mixin inputMixin {
+	border: none;
+	background-color: transparent;
+	color: white;
+	padding: 5px 10px;
+	font-size: 16px;
+	resize: none;
+	margin-bottom: 15px;
+	border-radius: 5px;
+
+	&:focus {
+		outline: none;
+	}
+	&:hover::placeholder,
+	&:focus::placeholder {
+		color: #b1b1b1;
+	}
+	&::placeholder {
+		font-weight: 500;
+		transition: color 200ms;
+	}
+}
+
+@mixin buttonMixin {
+	height: 30px;
+	cursor: pointer;
+	transition: background-color 200ms;
+	&:hover {
+		background-color: $accent;
+	}
+}

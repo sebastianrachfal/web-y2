@@ -1,4 +1,4 @@
-import Note from '../classes/Note';
+import Note from '@/classes/Note';
 
 type AppData = {
 	notes: Note[];

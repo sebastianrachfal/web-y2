@@ -4,134 +4,41 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Note app</title>
-		<style>
-			* {
-				box-sizing: border-box;
-			}
-			body {
-				overflow: hidden;
-				height: 100vh;
-				margin: 0;
-				font-family: Arial, Helvetica, sans-serif;
-				background-color: #f5f0e1;
-			}
-			header {
-				width: 100vw;
-				background-color: #1e3d59;
-				height: 80px;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-			}
-			input {
-				padding: 10px 15px;
-				border: none;
-				background-color: #f5f0e1;
-				border-radius: 8px 0px 0px 8px;
-				font-size: 24px;
-				color: #494641;
-				transition: background-color 200ms;
-			}
-			input:focus {
-				outline: none;
-			}
-			button {
-				background-color: #ff6e40;
-				color: white;
-				padding: 10px 20px;
-				border: none;
-				border-radius: 0px 8px 8px 0px;
-				cursor: pointer;
-				font-size: 24px;
-				transition: transform 0.1s;
-			}
-			button:hover {
-				transform: scale(1.1);
-			}
-			.card-container {
-				display: flex;
-				flex-wrap: wrap;
-				padding: 30px;
-				padding-top: 20px;
-			}
-			.card {
-				position: relative;
-				background-color: #ff6e40;
-				color: white;
-				width: 300px;
-				padding: 10px;
-				border-radius: 8px;
-				margin-right: 10px;
-				margin-top: 10px;
-			}
-			.card img {
-				position: absolute;
-				right: 26px;
-				top: -16px;
-				z-index: 9;
-				pointer-events: none;
-			}
-			.card__heading > h2 {
-				margin-top: 0px;
-				margin-bottom: 2px;
-			}
-			.card > h3 {
-				margin-top: 0px;
-				font-size: 14px;
-				z-index: 10;
-			}
-			.card__data {
-				display: flex;
-				justify-content: space-between;
-			}
-			.card__heading {
-				display: flex;
-				justify-content: space-between;
-			}
-			.card__close {
-				margin-top: 5px;
-				height: 22px;
-				width: 30px;
-				fill: white;
-				cursor: pointer;
-				padding: 4px;
-			}
-			.loader {
-				width: 90px;
-				height: 15px;
-				background-color: #3a5c7c;
-				margin-right: 10px;
-				border-radius: 10px;
-				padding: 3px;
-				display: flex;
-				align-items: center;
-			}
-			.loader__inner {
-				height: 100%;
-				background-color: #ff6e40;
-				border-radius: 10px;
-				animation: progress 30s infinite;
-				animation-timing-function: linear;
-			}
-			@keyframes progress {
-				0% {
-					width: 0%;
-				}
-				100% {
-					width: 100%;
-				}
-			}
-		</style>
+		<link rel="shortcut icon" href="assets/favicon.ico" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+			rel="stylesheet"
+		/>
+		<title>NoteKeep - Rachfał</title>
 	</head>
 	<body>
 		<header>
-			<div>
-				<!-- <input id="city-name" placeholder="Enter city name" /> -->
-				<button id="add-button">Add</button>
-			</div>
+			<h1>Note<span class="accent">Keep</span></h1>
 		</header>
-		<div id="city-container" class="card-container"></div>
+		<div class="note-creator" id="note-creator">
+			<input type="text" id="note-name" placeholder="Title" />
+			<textarea id="note-body" placeholder="Note content..."></textarea>
+			<div class="note-creator__menu">
+				<input
+					type="color"
+					class="note-creator__color"
+					id="note-color"
+					value="#202124"
+				/>
+				<button class="note-creator__button" id="note-add">Add</button>
+			</div>
+		</div>
+		<article class="note-container">
+			<section class="note-container">
+				<h2><span class="hashtag">#</span>Pinned</h2>
+				<div id="pinned-container"></div>
+			</section>
+			<section class="note-container">
+				<h2><span class="hashtag">#</span>Notes</h2>
+				<div id="notes-container"></div>
+			</section>
+		</article>
 		<script type="text/javascript" src="index.js"></script>
 	</body>
 </html>
