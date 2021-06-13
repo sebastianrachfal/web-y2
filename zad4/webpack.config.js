@@ -29,6 +29,11 @@ module.exports = {
 				to: '',
 				flatten: true,
 			},
+			{
+				from: './src/assets/favicon.ico',
+				to: 'assets/',
+				flatten: true,
+			},
 		]),
 	],
 	module: {

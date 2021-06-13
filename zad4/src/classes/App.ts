@@ -2,6 +2,8 @@ import { INote } from '@/interfaces/INote';
 import Note from '@/classes/Note';
 import Storage from '@/classes/Storage';
 import profiler from '@/decorators/profiler';
+
+const NO_NOTES = '<h2 class="no-notes">No notes here 😱</h2>';
 export default class App {
 	notes: Note[] = [];
 
@@ -147,9 +149,13 @@ export default class App {
 		const pushNote = (container: HTMLDivElement, note: Note) =>
 			(container.innerHTML += note.getHTML());
 
-		for (const note of pinnedNotes) pushNote(this.pinnedContainer, note);
+		if (pinnedNotes.length === 0) this.pinnedContainer.innerHTML = NO_NOTES;
+		else
+			for (const note of pinnedNotes)
+				pushNote(this.pinnedContainer, note);
 
-		for (const note of otherNotes) pushNote(this.notesContainer, note);
+		if (otherNotes.length === 0) this.notesContainer.innerHTML = NO_NOTES;
+		else for (const note of otherNotes) pushNote(this.notesContainer, note);
 	}
 
 	@profiler
@@ -158,6 +164,12 @@ export default class App {
 
 		note.pinned = !note.pinned;
 
+		this.printNotes();
+	}
+
+	@profiler
+	handleRemove(uuid: string) {
+		this.notes = this.notes.filter((note: INote) => note.id !== uuid);
 		this.printNotes();
 	}
 }

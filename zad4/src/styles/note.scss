@@ -8,17 +8,29 @@
 	min-width: 400px;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	max-width: calc((100vw - 36px) / 3 - 20px);
+
+	& > pre {
+		overflow-x: auto;
+		font-size: 16px;
+	}
+
 	& > h3 {
 		margin-top: 2px;
 		margin-bottom: 4px;
+		padding-right: 90px;
+		font-size: 18px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	&-container {
 		padding: 10px;
-		width: full;
-		height: full;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
+
 		& > h2 {
 			@include textShadowMixin;
 			color: white;
@@ -28,22 +40,39 @@
 	&s-wrapper {
 		display: flex;
 		flex-wrap: wrap;
+		align-items: flex-start;
 	}
 
 	&__pushpin {
 		@include noteButtonMixin;
-		right: 10px;
-		padding: 5px;
+		right: 40px;
+		padding: 1px;
+		color: lightgray;
+		& > svg {
+			width: 22px;
+			height: 22px;
+		}
 
 		&--selected {
 			background-color: $accent;
-			fill: $background;
+			color: $background;
 		}
 	}
 
 	&__edit {
 		@include noteButtonMixin;
-		right: 40px;
+		right: 70px;
 		padding: 4px;
+	}
+
+	&__remove {
+		@include noteButtonMixin;
+		right: 10px;
+		padding: 4px;
+		fill: none;
+		color: lightgray;
+		&:hover {
+			color: $background;
+		}
 	}
 }

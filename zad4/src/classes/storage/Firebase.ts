@@ -28,7 +28,7 @@ export default class Firebase implements AppStorage {
 
 		localStorage.setItem(config.LOCAL_STORAGE_KEY, JSON.stringify(appData));
 
-		this.ref = firebase.database(app).ref(`notefooks/${this.userId}`);
+		this.ref = firebase.database(app).ref(`notebooks/${this.userId}`);
 	}
 
 	@profiler
@@ -37,6 +37,7 @@ export default class Firebase implements AppStorage {
 			this.ref.set({
 				notes: data?.notes,
 			});
+		else this.ref.set({});
 	}
 
 	@profiler

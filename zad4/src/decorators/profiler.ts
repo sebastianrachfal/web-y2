@@ -12,7 +12,6 @@ const profiler = (
 ) => {
 	if (process.env.NODE_ENV !== 'development' || !config.PROFILING)
 		return descriptor;
-
 	const val = descriptor.value;
 	descriptor.value = function (...args: any) {
 		const start = performance.now();
