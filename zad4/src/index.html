@@ -17,7 +17,7 @@
 			<h1>Note<span class="accent">Keep</span></h1>
 		</header>
 		<div class="note-creator" id="note-creator">
-			<input type="text" id="note-name" placeholder="Title" />
+			<input type="text" id="note-title" placeholder="Title" />
 			<textarea id="note-body" placeholder="Note content..."></textarea>
 			<div class="note-creator__menu">
 				<input
@@ -32,11 +32,11 @@
 		<article class="note-container">
 			<section class="note-container">
 				<h2><span class="hashtag">#</span>Pinned</h2>
-				<div id="pinned-container"></div>
+				<div id="pinned-container" class="notes-wrapper"></div>
 			</section>
 			<section class="note-container">
 				<h2><span class="hashtag">#</span>Notes</h2>
-				<div id="notes-container"></div>
+				<div id="notes-container" class="notes-wrapper"></div>
 			</section>
 		</article>
 		<script type="text/javascript" src="index.js"></script>

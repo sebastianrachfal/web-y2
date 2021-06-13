@@ -1,12 +1,5 @@
 .note-creator {
-	display: flex;
-	flex-direction: column;
-	max-width: 500px;
-	padding: 5px;
-	border-radius: 10px;
-	border: 1px solid #5f6368;
-	margin: 10px auto;
-	box-shadow: 2px 2px 11px 4px #1c1c1d;
+	@include noteMixin;
 
 	& > input {
 		@include inputMixin;

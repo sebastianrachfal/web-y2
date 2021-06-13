@@ -7,13 +7,14 @@
 	resize: none;
 	margin-bottom: 15px;
 	border-radius: 5px;
+	@include textShadowMixin;
 
 	&:focus {
 		outline: none;
 	}
 	&:hover::placeholder,
 	&:focus::placeholder {
-		color: #b1b1b1;
+		color: #c5c5c5;
 	}
 	&::placeholder {
 		font-weight: 500;
@@ -27,5 +28,35 @@
 	transition: background-color 200ms;
 	&:hover {
 		background-color: $accent;
+	}
+}
+
+@mixin noteMixin {
+	display: flex;
+	flex-direction: column;
+	max-width: 500px;
+	padding: 5px;
+	border-radius: 10px;
+	border: 1px solid #5f6368;
+	margin: 10px auto;
+	box-shadow: 2px 2px 11px 4px #1c1c1d;
+}
+
+@mixin textShadowMixin {
+	text-shadow: 0px 2px 1px #00000080;
+}
+
+@mixin noteButtonMixin {
+	position: absolute;
+	height: 25px;
+	width: 25px;
+	fill: lightgray;
+	top: 10px;
+	cursor: pointer;
+	transition: all 200ms;
+	border-radius: 100%;
+	&:hover {
+		background-color: $accent;
+		fill: $background;
 	}
 }

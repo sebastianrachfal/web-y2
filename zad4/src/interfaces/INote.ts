@@ -1,7 +1,8 @@
 export interface INote {
-	name: string;
-	content: string;
+	id?: string;
+	title: string;
+	body: string;
 	pinned: boolean;
 	color: string;
-	added: Date;
+	added: number;
 }

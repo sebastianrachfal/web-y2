@@ -24,3 +24,7 @@ header {
 	color: $accent;
 	margin-right: 5px;
 }
+
+.flash-placeholder::placeholder {
+	color: rgb(200, 0, 0) !important;
+}

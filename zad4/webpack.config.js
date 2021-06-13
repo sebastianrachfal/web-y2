@@ -1,15 +1,26 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 
+const resolvePath = (name) => path.resolve(__dirname, `src/${name}`);
+
 module.exports = {
 	mode: 'development',
 	entry: './src/index.ts',
+	devtool: 'eval-cheap-source-map',
 	output: {
 		filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.json'],
+		alias: {
+			'@/helpers': resolvePath('helpers'),
+			'@/classes': resolvePath('classes'),
+			'@/types': resolvePath('types'),
+			'@/storage': resolvePath('classes/storage'),
+			'@/config': resolvePath('config.ts'),
+			'@/decorators': resolvePath('decorators'),
+		},
 	},
 	plugins: [
 		new CopyPlugin([
