@@ -44,10 +44,9 @@ export default class Firebase implements AppStorage {
 	readData(): Promise<AppData> {
 		return new Promise((resolve) =>
 			this.ref
-				.get()
+				?.get()
 				.then((data) => resolve(data.val() as AppData))
 				.catch((err) => {
-					console.error(err);
 					resolve({ notes: [] });
 				})
 		);
